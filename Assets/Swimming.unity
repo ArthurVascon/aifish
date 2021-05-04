@@ -357,8 +357,10 @@ MonoBehaviour:
   numFish: 20
   allFish: []
   swinLimits: {x: 5, y: 5, z: 5}
-  minSpeed: 0.79
+  minSpeed: 1.14
   maxSpeed: 3.61
+  neighbourDistance: 5.19
+  rotationSpeed: 2.33
 --- !u!4 &1449709300
 Transform:
   m_ObjectHideFlags: 0

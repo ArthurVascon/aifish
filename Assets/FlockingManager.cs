@@ -16,6 +16,8 @@ public class FlockingManager : MonoBehaviour
     [Header("Configurações do Cardume")] 
     [Range(0.0f, 5.0f)] public float minSpeed;
     [Range(0.0f, 5.0f)] public float maxSpeed;
+    [Range(1.0f, 10.0f)] public float neighbourDistance;
+    [Range(0.0f, 5.0f)] public float rotationSpeed;
 
     void Start() { 
         //Todos os peixes com o tamanho do número dos peixes
@@ -27,7 +29,8 @@ public class FlockingManager : MonoBehaviour
                 + new Vector3(Random.Range(-swinLimits.x, swinLimits.x), 
                 Random.Range(-swinLimits.y, swinLimits.y), Random.Range(-swinLimits.z, swinLimits.z));
             //Instancia os peixes no array.
-            allFish[i] = (GameObject)Instantiate(fishPrefab, pos, Quaternion.identity); 
+            allFish[i] = (GameObject)Instantiate(fishPrefab, pos, Quaternion.identity);
+            allFish[i].GetComponent<Flock>().myManager = this;
         } 
     }
     void Update() {
