@@ -18,15 +18,25 @@ public class Flock : MonoBehaviour
     }// Update is called once per frame
     void Update()
     {
-        Bounds b = new Bounds(myManager.transform.position, myManager.swinLimits * 2); 
+        Bounds b = new Bounds(myManager.transform.position, myManager.swinLimits * 2);
+        RaycastHit hit = new RaycastHit();
+
+        Vector3 direction = myManager.transform.position - transform.position;
+        //Bounds
         if (!b.Contains(transform.position)) { 
-            turning = true; 
+            turning = true;
+            direction = myManager.transform.position - transform.position;
+        } else if(Physics.Raycast(transform.position, this.transform.forward * 50, out hit))
+        {
+            //Se tiver perto de bater ele vai refletir pra longe do objeto.
+            turning = true;
+            direction = Vector3.Reflect(this.transform.forward, hit.normal);
         }
         else 
             turning = false;
         if (turning)
         {
-            Vector3 direction = myManager.transform.position - transform.position;
+            //Termos de rotação dele
             transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(direction), myManager.rotationSpeed * Time.deltaTime);
         }
         else { 
